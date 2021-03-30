@@ -1,46 +1,56 @@
 <template>
-  <div class="container vh-100">
-    <div class="slider h-100">
-      <div class="slides my-auto pb-5">
+  <div class="container-fluid ">
+    <div id="slider" class="slider h-100">
+      <div id="slides" class="slides pb-5">
         <div id="slide-1">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-2">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-3">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-4">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-5">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-6">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-7">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-8">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-9">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
         <div id="slide-10">
           <video type="video/mp4" class="w-100"
-                 src="../assets/videos/Mercedes_Leon_stage.mp4" poster="../assets/posters/mercedez.jpg"></video>
+                 src="../../assets/home/videos/Mercedes_Leon_stage.mp4"
+                 poster="../../assets/home/posters/mercedez.jpg"></video>
         </div>
       </div>
     </div>
@@ -58,6 +68,13 @@ export default {
   mounted: function () {
     // eslint-disable-next-line no-undef
     $(document).ready(function () {
+      // eslint-disable-next-line no-undef
+      $("#slides").on("mousewheel", function (event,delta) {
+        this.scrollLeft -= (event.originalEvent.wheelDelta);
+        console.log("entered",delta);
+        event.preventDefault();
+      });
+
       // eslint-disable-next-line no-undef,no-unused-vars
       $("video").on("mouseover", function (event) {
         this.play();
@@ -76,6 +93,10 @@ export default {
 <style scoped lang="scss">
 * {
   box-sizing: border-box;
+}
+
+.vh-80{
+  height: 80vh;
 }
 
 .slider {
@@ -106,6 +127,7 @@ export default {
 }
 
 .slides {
+  margin-top: 20vh;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -113,26 +135,44 @@ export default {
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    height: 5px;
+
+    &:hover {
+      cursor: grab;
+    }
+
+  }
+
+  &::-webkit-scrollbar-track-piece:end {
+    margin-right: 20vw;
+    background: #222;
+  }
+
+  &::-webkit-scrollbar-track-piece:start {
+    margin-left: 20vw;
+    background: #222;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: black;
+    background: white;
+    width: 30%;
+
+    &:hover {
+      cursor: grab;
+    }
   }
 
   &::-webkit-scrollbar-track {
     padding-right: 20%;
     padding-left: 20%;
-    background: transparent;
+    width: 30%;
   }
 
   > div {
     scroll-snap-align: start;
     flex-shrink: 0;
-    width: 30%;
+    width: 33.33%;
     height: 300px;
-    margin-right: 5%;
     transform-origin: center center;
     transform: scale(1);
     transition: transform 0.5s;
@@ -180,9 +220,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #74ABE2, #5563DE);
   font-family: 'Ropa Sans', sans-serif;
 }
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+  .slides {
+    > div {
+      width: 100%;
+    }
+  }
+}
+
 
 </style>
 
